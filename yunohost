@@ -1,7 +1,5 @@
 SUITE="stretch"
 
-ls -l /home/
-
 ls -l  /usr/share/debootstrap/scripts/stretch
 
 . /usr/share/debootstrap/scripts/stretch
@@ -15,19 +13,20 @@ save_function() {
 save_function second_stage_install origin_second_stage_install 
 
 second_stage_install() {
-	SUITE="stretch"
+    SUITE="stretch"
     origin_second_stage_install $@
     
-	echo "deb http://ftp.fr.debian.org/debian stretch main" > $TARGET/etc/apt/sources.list.d/wtf.list
+    echo "deb http://ftp.fr.debian.org/debian stretch main" > $TARGET/etc/apt/sources.list.d/debian.list
     in_target apt update
     in_target apt install -y wget debhelper
     in_target wget -O /root/install_yunohost https://install.yunohost.org
     in_target chmod a+x /root/install_yunohost
-mv "$TARGET/sbin/start-stop-daemon" "$TARGET/sbin/start-stop-daemon.REAL"
-echo "#!/bin/sh
+    mv "$TARGET/sbin/start-stop-daemon" "$TARGET/sbin/start-stop-daemon.REAL"
+    echo "#!/bin/sh
 echo
 echo \"Warning: Fake start-stop-daemon called, doing nothing\"" > "$TARGET/sbin/start-stop-daemon"
     chmod 755 "$TARGET/sbin/start-stop-daemon"
     in_target /root/install_yunohost -a -d stable
     mv "$TARGET/sbin/start-stop-daemon.REAL" "$TARGET/sbin/start-stop-daemon"
+    rm -f $TARGET/etc/apt/sources.list.d/debian.list
 }
