@@ -9,6 +9,12 @@ git clone https://github.com/YunoHost/yunohost-debootstrap
 sudo cp yunohost-debootstrap/yunohost /usr/share/debootstrap/scripts/
 ```
 
+## Patch debootstrap
+You need to patch debootstrap like this:
+```
+sed -i "s@#\!/bin/bash@#\!/bin/sh@" /usr/sbin/debootstrap
+```
+
 ## Test it
 ```
 mkdir ynh_chroot
