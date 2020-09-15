@@ -1,8 +1,8 @@
 SUITE="buster"
 
-ls -l  /usr/share/debootstrap/scripts/stretch
+ls -l  /usr/share/debootstrap/scripts/buster
 
-. /usr/share/debootstrap/scripts/stretch
+. /usr/share/debootstrap/scripts/buster
 
 save_function() {
     local ORIG_FUNC=$(declare -f $1)
