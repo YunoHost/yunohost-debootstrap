@@ -12,7 +12,7 @@ sudo cp yunohost-debootstrap/yunohost /usr/share/debootstrap/scripts/
 ## Patch debootstrap
 You need to patch debootstrap like this:
 ```
-sed -i "s@#\!/bin/bash@#\!/bin/sh@" /usr/sbin/debootstrap
+sed -i "s@#\!/bin/sh@#\!/bin/bash@" /usr/sbin/debootstrap
 ```
 
 ## Test it
