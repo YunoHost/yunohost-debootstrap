@@ -1,8 +1,8 @@
-SUITE="buster"
+SUITE="bullseye"
 
-ls -l  /usr/share/debootstrap/scripts/buster
+ls -l  /usr/share/debootstrap/scripts/bullseye
 
-. /usr/share/debootstrap/scripts/buster
+. /usr/share/debootstrap/scripts/bullseye
 
 save_function() {
     local ORIG_FUNC=$(declare -f $1)
@@ -13,10 +13,10 @@ save_function() {
 save_function second_stage_install origin_second_stage_install 
 
 second_stage_install() {
-    SUITE="buster"
+    SUITE="bullseye"
     origin_second_stage_install $@
     
-    echo "deb http://ftp.fr.debian.org/debian buster main" > $TARGET/etc/apt/sources.list.d/debian.list
+    echo "deb http://ftp.fr.debian.org/debian bullseye main" > $TARGET/etc/apt/sources.list.d/debian.list
     in_target apt update
     in_target apt install -y wget debhelper
     in_target wget -O /root/install_yunohost https://install.yunohost.org
